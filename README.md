@@ -50,3 +50,11 @@ https://sequelize.org/v5/manual/data-types.html
 ```up-models
 npm run up-models
 ```
+
+```git flow
+# git flow
+git flow init
+git flow feature start <ชื่อ>
+git flow feature finish <ชื่อ>
+git flow feature public <ชื่อ>
+```
