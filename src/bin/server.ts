@@ -47,6 +47,8 @@ const onError = (error: any) => {
 
 
 const port = normalizePort(config.PORT || '3000');
+console.log(`post is running ${port}`);
+
 app.set('port', port);
 
 server.listen(port);
