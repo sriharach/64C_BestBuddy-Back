@@ -7,7 +7,7 @@
     "dev": "nodemon ./bin/server.ts",
     "build": "rm -rf build && sucrase ./src -d ./build --transforms typescript,imports",
     "start:dev": "npm run build && nodemon ./build/bin/server.js",
-    "up-models": "sequelize-auto -o './src/models' -d defect_log_db -h 103.253.72.178 -u hrSystemAdmin -p 5432 -x 4Dm!n2020@Interset -e postgres -l ts"
+    "up-models": "sequelize-auto -o './src/models' -d bestbuddy_dev -h 103.253.72.178 -u hrSystemAdmin -p 5432 -x 4Dm!n2020@Interset -e postgres -l ts"
   },
   "author": "",
   "license": "ISC",
