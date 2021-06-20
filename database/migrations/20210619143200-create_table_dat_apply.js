@@ -116,6 +116,40 @@ module.exports = {
           allowNull: true,
           comment: "ตำแหน่งล่าสุด",
         },
+        created_by: {
+          type: Sequelize.UUID,
+          allowNull: false,
+          comment: "สร้างข้อมูลโดย",
+          references: {
+            model: {
+              tableName: "sysm_users",
+              schema: "system",
+            },
+            key: "id",
+          },
+        },
+        created_date: {
+          type: Sequelize.DATE,
+          allowNull: false,
+          comment: "สร้างข้อมูลวันที่",
+        },
+        update_by: {
+          type: Sequelize.UUID,
+          allowNull: true,
+          comment: "แก้ไขข้อมูลโดย",
+          references: {
+            model: {
+              tableName: "sysm_users",
+              schema: "system",
+            },
+            key: "id",
+          },
+        },
+        update_date: {
+          type: Sequelize.DATE,
+          allowNull: true,
+          comment: "แก้ไขข้อมูลวันที่",
+        },
       },
       {
         schema: "bestbuddy_data", // default: public, PostgreSQL only.

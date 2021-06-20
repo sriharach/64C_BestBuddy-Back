@@ -4,7 +4,7 @@ import type { master_category_blog, master_category_blogId } from './master_cate
 import type { sysm_users, sysm_usersId } from './sysm_users';
 
 export interface dat_blogAttributes {
-  id: string;
+  id?: string;
   category_id: string;
   blog_title: string;
   blog_detail?: string;
@@ -23,7 +23,7 @@ export type dat_blogId = dat_blog[dat_blogPk];
 export type dat_blogCreationAttributes = Optional<dat_blogAttributes, dat_blogPk>;
 
 export class dat_blog extends Model<dat_blogAttributes, dat_blogCreationAttributes> implements dat_blogAttributes {
-  id!: string;
+  id?: string;
   category_id!: string;
   blog_title!: string;
   blog_detail?: string;
@@ -57,6 +57,8 @@ export class dat_blog extends Model<dat_blogAttributes, dat_blogCreationAttribut
     id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      comment: "รหัสหลักหน้า blog",
       primaryKey: true
     },
     category_id: {

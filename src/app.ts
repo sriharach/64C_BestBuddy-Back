@@ -13,6 +13,7 @@ import indexRouter from './routes'
 import authRouter from './routes/authRouter'
 import uploadRouter from './routes/uploadRouter'
 import masterDataRouter from './routes/masterDataRouter'
+import applyRouter from './routes/applyRouter'
 
 
 /* config app */
@@ -34,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/upload', uploadRouter);
 app.use('/masterData', masterDataRouter);
+app.use('/apply', applyRouter);
 
 app.use((req, res, next) => {
     next(createError(404));

@@ -3,7 +3,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import type { sysm_roles, sysm_rolesId } from './sysm_roles';
 
 export interface sysm_usersAttributes {
-  id: string;
+  id?: string;
   username: string;
   password: string;
   email: string;
@@ -20,7 +20,7 @@ export type sysm_usersId = sysm_users[sysm_usersPk];
 export type sysm_usersCreationAttributes = Optional<sysm_usersAttributes, sysm_usersPk>;
 
 export class sysm_users extends Model<sysm_usersAttributes, sysm_usersCreationAttributes> implements sysm_usersAttributes {
-  id!: string;
+  id?: string;
   username!: string;
   password!: string;
   email!: string;
@@ -52,6 +52,8 @@ export class sysm_users extends Model<sysm_usersAttributes, sysm_usersCreationAt
     id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      comment: "รหัสหลักผู้ใช้งานระบบ",
       primaryKey: true
     },
     username: {
@@ -74,14 +76,14 @@ export class sysm_users extends Model<sysm_usersAttributes, sysm_usersCreationAt
     roles_id: {
       type: DataTypes.UUID,
       allowNull: false,
-      comment: "ไอดี ของ ตาราง sysm_roles",
+      comment: "รหัสตารางข้อมูลสิทธิ์การใช้งานระบบ sysm_roles",
       references: {
         model: 'sysm_roles',
         key: 'id'
       }
     },
     isuse: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.SMALLINT,
       allowNull: false,
       comment: "สถานะ : 0 = ยกเลิก , 1 = ใช้งาน"
     },

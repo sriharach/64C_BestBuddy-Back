@@ -72,8 +72,14 @@ export function initModels(sequelize: Sequelize) {
   master_category_blog.hasMany(dat_blog, { as: "dat_blogs", foreignKey: "category_id"});
   dat_apply.belongsTo(master_education, { as: "education", foreignKey: "education_id"});
   master_education.hasMany(dat_apply, { as: "dat_applies", foreignKey: "education_id"});
+  dat_apply.belongsTo(master_prefix, { as: "prefix", foreignKey: "prefix_id"});
+  master_prefix.hasMany(dat_apply, { as: "dat_applies", foreignKey: "prefix_id"});
   dat_person.belongsTo(master_prefix, { as: "prefix", foreignKey: "prefix_id"});
   master_prefix.hasMany(dat_person, { as: "dat_people", foreignKey: "prefix_id"});
+  dat_apply.belongsTo(sysm_users, { as: "created_by_sysm_user", foreignKey: "created_by"});
+  sysm_users.hasMany(dat_apply, { as: "dat_applies", foreignKey: "created_by"});
+  dat_apply.belongsTo(sysm_users, { as: "update_by_sysm_user", foreignKey: "update_by"});
+  sysm_users.hasMany(dat_apply, { as: "update_by_dat_applies", foreignKey: "update_by"});
   dat_blog.belongsTo(sysm_users, { as: "created_by_sysm_user", foreignKey: "created_by"});
   sysm_users.hasMany(dat_blog, { as: "dat_blogs", foreignKey: "created_by"});
   dat_blog.belongsTo(sysm_users, { as: "update_by_sysm_user", foreignKey: "update_by"});

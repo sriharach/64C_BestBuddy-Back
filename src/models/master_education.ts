@@ -2,7 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
 export interface master_educationAttributes {
-  id: string;
+  id?: string;
   education_name: string;
   sort?: number;
 }
@@ -12,7 +12,7 @@ export type master_educationId = master_education[master_educationPk];
 export type master_educationCreationAttributes = Optional<master_educationAttributes, master_educationPk>;
 
 export class master_education extends Model<master_educationAttributes, master_educationCreationAttributes> implements master_educationAttributes {
-  id!: string;
+  id?: string;
   education_name!: string;
   sort?: number;
 
@@ -22,6 +22,8 @@ export class master_education extends Model<master_educationAttributes, master_e
     id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      comment: "รหัสหลักระดับการศึกษา",
       primaryKey: true
     },
     education_name: {

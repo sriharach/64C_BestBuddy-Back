@@ -3,7 +3,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import type { sysm_users, sysm_usersId } from './sysm_users';
 
 export interface master_positionAttributes {
-  id: string;
+  id?: string;
   position_name: string;
   position_detail?: string;
   detail?: string;
@@ -22,7 +22,7 @@ export type master_positionId = master_position[master_positionPk];
 export type master_positionCreationAttributes = Optional<master_positionAttributes, master_positionPk>;
 
 export class master_position extends Model<master_positionAttributes, master_positionCreationAttributes> implements master_positionAttributes {
-  id!: string;
+  id?: string;
   position_name!: string;
   position_detail?: string;
   detail?: string;
@@ -51,6 +51,8 @@ export class master_position extends Model<master_positionAttributes, master_pos
     id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      comment: "รหัสหลักตำแหน่งงานผู้สมัคร",
       primaryKey: true
     },
     position_name: {

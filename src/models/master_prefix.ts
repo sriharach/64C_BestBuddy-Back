@@ -2,7 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
 export interface master_prefixAttributes {
-  id: string;
+  id?: string;
   prefix_name: string;
   sort?: number;
 }
@@ -12,7 +12,7 @@ export type master_prefixId = master_prefix[master_prefixPk];
 export type master_prefixCreationAttributes = Optional<master_prefixAttributes, master_prefixPk>;
 
 export class master_prefix extends Model<master_prefixAttributes, master_prefixCreationAttributes> implements master_prefixAttributes {
-  id!: string;
+  id?: string;
   prefix_name!: string;
   sort?: number;
 
@@ -22,6 +22,8 @@ export class master_prefix extends Model<master_prefixAttributes, master_prefixC
     id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      comment: "รหัสหลักคำนำหน้าชื่อ",
       primaryKey: true
     },
     prefix_name: {

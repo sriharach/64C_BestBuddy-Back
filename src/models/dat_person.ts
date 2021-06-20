@@ -4,7 +4,7 @@ import type { master_prefix, master_prefixId } from './master_prefix';
 import type { sysm_users, sysm_usersId } from './sysm_users';
 
 export interface dat_personAttributes {
-  id: string;
+  id?: string;
   user_id: string;
   prefix_id?: string;
   first_name_th?: string;
@@ -24,7 +24,7 @@ export type dat_personId = dat_person[dat_personPk];
 export type dat_personCreationAttributes = Optional<dat_personAttributes, dat_personPk>;
 
 export class dat_person extends Model<dat_personAttributes, dat_personCreationAttributes> implements dat_personAttributes {
-  id!: string;
+  id?: string;
   user_id!: string;
   prefix_id?: string;
   first_name_th?: string;
@@ -54,6 +54,8 @@ export class dat_person extends Model<dat_personAttributes, dat_personCreationAt
     id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      comment: "รหัสหลักข้อมูลส่วนบุคคล",
       primaryKey: true
     },
     user_id: {
