@@ -8,6 +8,9 @@ module.exports = {
       {
         id: {
           type: Sequelize.UUID,
+          defaultValue: Sequelize.literal('uuid_generate_v4()'),
+          allowNull: false,
+          comment: "รหัสหลักสิทธิ์เข้าใช้งานระบบ",
           primaryKey: true,
         },
         roles_name: {

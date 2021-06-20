@@ -8,6 +8,9 @@ module.exports = {
       {
         id: {
           type: Sequelize.UUID,
+          defaultValue: Sequelize.literal('uuid_generate_v4()'),
+          allowNull: false,
+          comment: "รหัสหลักผู้ใช้งานระบบ",
           primaryKey: true,
         },
         username: {
@@ -30,7 +33,7 @@ module.exports = {
         roles_id: {
           type: Sequelize.UUID,
           allowNull: false,
-          comment: "ไอดี ของ ตาราง sysm_roles",
+          comment: "รหัสตารางข้อมูลสิทธิ์การใช้งานระบบ sysm_roles",
           references: {
             model: {
               tableName: "sysm_roles",
@@ -40,7 +43,7 @@ module.exports = {
           },
         },
         isuse: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.SMALLINT,
           unique: false,
           allowNull: false,
           comment: "สถานะ : 0 = ยกเลิก , 1 = ใช้งาน",

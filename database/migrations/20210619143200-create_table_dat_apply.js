@@ -7,7 +7,27 @@ module.exports = {
       {
         id: {
           type: Sequelize.UUID,
+          defaultValue: Sequelize.literal('uuid_generate_v4()'),
+          allowNull: false,
+          comment: "รหัสหลักสมัครงาน",
           primaryKey: true,
+        },
+        position_id: {
+          type: Sequelize.ARRAY(Sequelize.UUID),
+          allowNull: true,
+          comment: "รหัสตารางตำแหน่งงาน",
+        },
+        prefix_id: {
+          type: Sequelize.UUID,
+          allowNull: true,
+          comment: "รหัสตารางคำนำหน้าชื่อ",
+          references: {
+            model: {
+              tableName: "master_prefix",
+              schema: "master",
+            },
+            key: "id",
+          },
         },
         fullname_th: {
           type: Sequelize.STRING,
@@ -95,11 +115,6 @@ module.exports = {
           type: Sequelize.JSON,
           allowNull: true,
           comment: "ตำแหน่งล่าสุด",
-        },
-        position_id: {
-          type: Sequelize.ARRAY(Sequelize.UUID),
-          allowNull: true,
-          comment: "ตำแหน่งงานที่สนใจ",
         },
       },
       {

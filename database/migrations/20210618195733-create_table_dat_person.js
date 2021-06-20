@@ -7,6 +7,9 @@ module.exports = {
       {
         id: {
           type: Sequelize.UUID,
+          defaultValue: Sequelize.literal('uuid_generate_v4()'),
+          allowNull: false,
+          comment: "รหัสหลักข้อมูลส่วนบุคคล",
           primaryKey: true,
         },
         user_id: {
