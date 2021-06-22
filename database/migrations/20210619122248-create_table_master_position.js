@@ -1,58 +1,51 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return await queryInterface.createTable(
-      "dat_blog",
+      "master_position",
       {
         id: {
           type: Sequelize.UUID,
           defaultValue: Sequelize.literal('uuid_generate_v4()'),
           allowNull: false,
-          comment: "รหัสหลักหน้า blog",
+          comment: "รหัสหลักตำแหน่งงานผู้สมัคร",
           primaryKey: true,
         },
-        category_id: {
-          type: Sequelize.UUID,
+        position_name: {
+          type: Sequelize.STRING(150),
           allowNull: false,
-          comment: "รหัส ตาราง ประเภท หมวด ของ blog",
-          references: {
-            model: {
-              tableName: "master_category_blog",
-              schema: "master",
-            },
-            key: "id",
-          },
+          comment: "ชื่อตำแหน่งงาน",
         },
-        blog_title: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          comment: "หัวข้อ",
-        },
-        blog_detail: {
+        position_detail: {
           type: Sequelize.TEXT,
           allowNull: true,
-          comment: "รายละเอียด",
+          comment: "รายละเอียดงาน",
         },
-        path_img: {
-          type: Sequelize.JSON,
+        detail: {
+          type: Sequelize.TEXT,
           allowNull: true,
-          comment: "ที่จัดเก็บรูป",
+          comment: "รายละเอียดงาน",
         },
-        blog_count: {
-          type: Sequelize.INTEGER,
+        responsibility: {
+          type: Sequelize.TEXT,
           allowNull: true,
-          comment: "จำนวนคนเข้าชม",
+          comment: "หน้าที่ความรับผิดชอบ",
         },
-        status: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          comment: "สถานะ : 1 = บทความ , 2 = กิจกรรมบริษัท",
+        required_properties: {
+          type: Sequelize.TEXT,
+          allowNull: true,
+          comment: "คุณสมบัติที่จำเป็น",
         },
         isuse: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          comment: "สถานะ : 0 = ยกเลิก , 1 = ใช้งาน",
+          comment: "สถานะ : 0 = ไม่ใช้งาน , 1 = เปิดรับสมัคร , 2 = ปิดรับสมัคร",
+        },
+        sort: {
+          type: Sequelize.INTEGER(11),
+          allowNull: true,
+          comment: "ลำดับ",
         },
         created_by: {
           type: Sequelize.UUID,
@@ -90,16 +83,16 @@ module.exports = {
         },
       },
       {
-        schema: "bestbuddy_data", // default: public, PostgreSQL only.
-        comment: "ตาราง บทความ", // comment for table
+        schema: "master", // default: public, PostgreSQL only.
+        comment: "ตาราง ตำแหน่งงาน", // comment for table
       }
     );
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable({
-      tableName: "dat_blog",
-      schema: "bestbuddy_data",
+    return await queryInterface.dropTable({
+      tableName: "master_position",
+      schema: "master",
     });
-  }
+  },
 };

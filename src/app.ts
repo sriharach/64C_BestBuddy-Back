@@ -5,6 +5,7 @@ import upload from 'express-fileupload'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import helmet from 'helmet'
+import paginate from 'express-paginate'
 
 import errorHandler from './middleware/errorHandler'
 
@@ -12,6 +13,10 @@ import errorHandler from './middleware/errorHandler'
 import indexRouter from './routes'
 import authRouter from './routes/authRouter'
 import uploadRouter from './routes/uploadRouter'
+import masterDataRouter from './routes/masterDataRouter'
+import applyRouter from './routes/applyRouter'
+import jobPositionRouter from './routes/jobPositionRouter'
+import blogRouter from './routes/blogRouter'
 
 
 /* config app */
@@ -20,6 +25,7 @@ const app = express();
 app.use(cors());
 app.use(helmet());
 app.use(upload())
+app.use(paginate.middleware(10, 50));
 
 // view engine setup
 
@@ -32,6 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/upload', uploadRouter);
+app.use('/masterData', masterDataRouter);
+app.use('/apply', applyRouter);
+app.use('/jobPosition', jobPositionRouter);
+app.use('/blog', blogRouter);
 
 app.use((req, res, next) => {
     next(createError(404));

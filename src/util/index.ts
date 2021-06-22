@@ -22,7 +22,7 @@ export const sequelizeStringFindOne = async (sql: string, bind?: number[] | stri
 /* เข้ารหัส Password */
 export const encryptPassword = async (password: string) => {
     const salt = await bcrypt.genSalt(5);
-    const hashPassword = await bcrypt.hash(password, salt);
+    const hashPassword: string = await bcrypt.hash(password, salt);
     return hashPassword;
 }
 

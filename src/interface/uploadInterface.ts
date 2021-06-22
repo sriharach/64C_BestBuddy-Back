@@ -6,9 +6,9 @@ export interface Upload {
 }
 
 export interface UploadFile {
-    location: string,
-    path: string,
-    nameOld: string,
-    nameNew: string,
-    type: string,
+    location?: string,
+    path?: string,
+    nameOld?: string,
+    nameNew?: string,
+    type?: string,
 }

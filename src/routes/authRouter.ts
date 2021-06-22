@@ -1,8 +1,12 @@
 import express from 'express';
-import authControllers from '../controllers/authControllers';
+import { body, validationResult } from 'express-validator'
+
+import { registerControllers, loginControllers, refreshTokenControllers } from '../controllers/authControllers';
 
 const router = express.Router();
 
-router.get('/login', authControllers.login);
+router.post('/login', loginControllers);
+router.post('/refreshToken', refreshTokenControllers);
+router.post('/register', registerControllers);
 
 export default router;

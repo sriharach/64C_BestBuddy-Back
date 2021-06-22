@@ -2,22 +2,21 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /* สร้าง ตาราง sysmusers */
     return await queryInterface.createTable(
-      "sysm_roles",
+      "master_education",
       {
         id: {
           type: Sequelize.UUID,
           defaultValue: Sequelize.literal('uuid_generate_v4()'),
           allowNull: false,
-          comment: "รหัสหลักสิทธิ์เข้าใช้งานระบบ",
+          comment: "รหัสหลักระดับการศึกษา",
           primaryKey: true,
         },
-        roles_name: {
+        education_name: {
           type: Sequelize.STRING(150),
-          unique: true,
+          unique: false,
           allowNull: false,
-          comment: "ชื่อสิทธิ์",
+          comment: "ชื่อ ระดับการศึกษา",
         },
         sort: {
           type: Sequelize.INTEGER(11),
@@ -26,23 +25,16 @@ module.exports = {
         },
       },
       {
-        schema: "system", // default: public, PostgreSQL only.
-        comment: "ตาราง สิทธิ์ผู้ใช้งาน", // comment for table
+        schema: "master", // default: public, PostgreSQL only.
+        comment: "ตาราง ระดับการศึกษา", // comment for table
       }
     );
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-
     return await queryInterface.dropTable({
-      tableName: "sysm_roles",
-      schema: "system",
+      tableName: "master_education",
+      schema: "master",
     });
   },
 };
